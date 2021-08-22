@@ -32,12 +32,11 @@ public class ThreadController {
 	}
 	
 	@RequestMapping(value="/thread/create", method=RequestMethod.POST)
-	public String threadSave(@RequestParam(value="name")String name,
-							 @RequestParam(value="id")String id) {
-		int userId = Integer.parseInt(id);
+	public String threadSave(@RequestParam(value="title")String title,
+							 @RequestParam(value="handleName")String handleName) {
 		Thread thread = new Thread();
-		thread.setName(name);
-		thread.setUserId(userId);
+		thread.setTitle(title);
+		thread.setHandleName(handleName);
 		repository.saveAndFlush(thread);
 		return "redirect:/thread";
 	}
@@ -48,13 +47,13 @@ public class ThreadController {
 	@PostConstruct
 	public void ThreadInit(){
 		Thread thread1 = new Thread();
-		thread1.setName("Can you recommend any restaurants in Sendai?");
-		thread1.setUserId(1);
+		thread1.setTitle("Can you recommend any restaurants in Sendai?");
+		thread1.setHandleName("testuser1");
 		repository.saveAndFlush(thread1);
 		
 		Thread thread2 = new Thread();
-		thread2.setName("Let's play games together!");
-		thread2.setUserId(2);
+		thread2.setTitle("Let's play games together!");
+		thread2.setHandleName("testuser2");
 		repository.saveAndFlush(thread2);
 
 	}

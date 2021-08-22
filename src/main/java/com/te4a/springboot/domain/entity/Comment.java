@@ -24,7 +24,7 @@ public class Comment {
 	private int threadId;
 	
 	@Column(nullable = false)
-	private int userId;
+	private String handleName;;
 	
 	@Column(nullable = false)
 	private String comment;
@@ -48,12 +48,12 @@ public class Comment {
 		this.threadId = threadId;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getHandleName() {
+		return handleName;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setHandleName(String handleName) {
+		this.handleName = handleName;
 	}
 
 	public String getComment() {

@@ -17,11 +17,11 @@ public class Thread {
     @Column
     private int id;
 
-    @Column(length = 100,nullable = true)
-    private String name;
+    @Column(length = 100, nullable = false)
+    private String title;
 
-    @Column(nullable = true)
-    private int userId;
+    @Column(length = 100, nullable = false)
+    private String handleName;
 
     public int getId() {
         return id;
@@ -31,20 +31,20 @@ public class Thread {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public int getUserId() {
-        return userId;
-    }
+	public String getHandleName() {
+		return handleName;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public void setHandleName(String handleName) {
+		this.handleName = handleName;
+	}
 
 }

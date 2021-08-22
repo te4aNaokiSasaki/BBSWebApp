@@ -29,10 +29,10 @@
     
 	<h1>スレッド一覧</h1>
 	<table border="1">
-		<tr><th>タイトル</th><th>作成者ID</th></tr>
+		<tr><th>タイトル</th><th>作成者</th></tr>
 		<tr th:each="obj : ${threadData}">
-			<td><a th:href="@{'/comment/{id}'(id=${obj.id})}"><p th:text="${obj.name}"></p></a></td>
-			<td th:text="${obj.userId}"></td>
+			<td><a th:href="@{'/comment/{id}'(id=${obj.id})}"><p th:text="${obj.title}"></p></a></td>
+			<td th:text="${obj.handleName}"></td>
 		</tr>
 	</table>
 	

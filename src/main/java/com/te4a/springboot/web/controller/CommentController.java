@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.te4a.springboot.domain.entity.Comment;
@@ -29,6 +30,27 @@ public class CommentController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/comment/create", method=RequestMethod.GET)
+	public String threadCreate() {
+		return "commentcreate";
+	}
+	
+	//作成中
+	@RequestMapping(value="/comment/create", method=RequestMethod.POST)
+	public String threadSave(@RequestParam(value="comment")String postComment,
+							 @RequestParam(value="handleName")String handleName) {
+		Comment comment = new Comment();
+		comment.setComment(postComment);
+		comment.setHandleName(handleName);
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		Date d = calendar.getTime();
+		comment.setCommentDate(d);
+		repository.saveAndFlush(comment);
+		return "redirect:/thread";
+	}
+	
 	
 	
 	//ダミーデータの作成
@@ -37,8 +59,8 @@ public class CommentController {
 		
 		Comment comment1 = new Comment();
 		comment1.setThreadId(1);
-		comment1.setUserId(1);
-		comment1.setComment("aaaaa");
+		comment1.setHandleName("テストユーザー1");
+		comment1.setComment("おすすめはありますか？");
 		Date date1 = new Date();
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.setTime(date1);
@@ -48,8 +70,8 @@ public class CommentController {
 		
 		Comment comment2 = new Comment();
 		comment2.setThreadId(1);
-		comment2.setUserId(2);
-		comment2.setComment("bbbb");
+		comment2.setHandleName("テストユーザー2");
+		comment2.setComment("何系が良いですか？");
 		Date date2 = new Date();
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.setTime(date2);
@@ -60,8 +82,8 @@ public class CommentController {
 		
 		Comment comment3 = new Comment();
 		comment3.setThreadId(2);
-		comment3.setUserId(1);
-		comment3.setComment("cccc");
+		comment3.setHandleName("テストユーザー３");
+		comment3.setComment("どのゲームにします？");
 		Date date3 = new Date();
 		Calendar calendar3 = Calendar.getInstance();
 		calendar3.setTime(date3);
@@ -71,14 +93,14 @@ public class CommentController {
 		repository.saveAndFlush(comment3);
 		
 		Comment comment4 = new Comment();
+		comment4.setThreadId(2);
+		comment4.setHandleName("テストユーザー４");
+		comment4.setComment("何にしましょう");
 		Date date4 = new Date();
 		Calendar calendar4 = Calendar.getInstance();
 		calendar4.setTime(date4);
 		calendar4.add(Calendar.MONTH, 4);
 		Date d4 = calendar4.getTime();
-		comment4.setThreadId(2);
-		comment4.setUserId(2);
-		comment4.setComment("dddd");
 		comment4.setCommentDate(d4);
 		repository.saveAndFlush(comment4);
 
